@@ -89,14 +89,12 @@ class LogAndPersistResultCrawlObserver extends CrawlObserver
         UriInterface $url,
         ResponseInterface $response,
         ?UriInterface $foundOnUrl = null,
-        ?string $linkText = null
-    ) {
+        ?string $linkText = null,
+    ): void {
         $statusCode = $response->getStatusCode();
         if (!$this->isExcludedStatusCode($statusCode)) {
             $this->addCrawlingResultToStore($url, $foundOnUrl, $statusCode);
         }
-
-        return $statusCode;
     }
 
     /**
@@ -105,14 +103,13 @@ class LogAndPersistResultCrawlObserver extends CrawlObserver
     public function crawlFailed(
         UriInterface $url,
         RequestException $requestException,
-        ?UriInterface $foundOnUrl = null
-    ): int {
+        ?UriInterface $foundOnUrl = null,
+        string $linkText = null,
+    ): void {
         $statusCode = (int)$requestException->getCode();
         if (!$this->isExcludedStatusCode($statusCode)) {
             $this->addCrawlingResultToStore($url, $foundOnUrl, $statusCode);
         }
-
-        return $statusCode;
     }
 
     /**
