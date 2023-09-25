@@ -88,7 +88,8 @@ class LogAndPersistResultCrawlObserver extends CrawlObserver
     public function crawled(
         UriInterface $url,
         ResponseInterface $response,
-        ?UriInterface $foundOnUrl = null
+        ?UriInterface $foundOnUrl = null,
+        ?string $linkText = null
     ) {
         $statusCode = $response->getStatusCode();
         if (!$this->isExcludedStatusCode($statusCode)) {
